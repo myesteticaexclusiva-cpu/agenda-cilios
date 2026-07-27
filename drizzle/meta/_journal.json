@@ -1,0 +1,34 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1784597984837,
+      "tag": "0000_reflective_xavin",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1784598185576,
+      "tag": "0001_right_ogun",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1784598892021,
+      "tag": "0002_flat_celestials",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1784599448504,
+      "tag": "0003_big_plazm",
+      "breakpoints": true
+    }
+  ]
+}

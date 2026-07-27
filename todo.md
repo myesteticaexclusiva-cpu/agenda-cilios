@@ -1,0 +1,45 @@
+# Project TODO
+
+- [x] Definir o modelo de dados para exatamente duas profissionais com agendas e intervalos independentes.
+- [x] Definir serviços, durações e regras de disponibilidade para cada profissional.
+- [x] Criar tabelas de clientes, agendamentos, disponibilidade, intervalos, modelos de mensagem e registros de entrega.
+- [x] Aplicar a migração do banco de dados e validar suas relações e restrições.
+- [x] Implementar a página pública premium de agendamento.
+- [x] Permitir que a cliente escolha uma das duas profissionais, o procedimento, a data e um horário disponível.
+- [x] Solicitar nome, telefone com WhatsApp, e-mail e consentimento para receber notificações no formulário público.
+- [x] Bloquear conflitos de horário tanto na consulta de disponibilidade quanto na criação do agendamento.
+- [x] Criar a confirmação visual do agendamento com os dados da cliente e da profissional.
+- [x] Construir o painel administrativo protegido com visão geral das duas agendas.
+- [x] Exibir, confirmar, reagendar e cancelar agendamentos no painel administrativo.
+- [x] Permitir configurar horários de trabalho e intervalos separadamente para cada profissional.
+- [x] Criar histórico de clientes e agendamentos com busca por nome ou telefone.
+- [ ] Criar editor de modelos de WhatsApp para confirmação, lembrete de 24 horas e lembrete no dia do atendimento.
+- [ ] Suportar variáveis de mensagem para nome da cliente, profissional, procedimento, data e horário.
+- [ ] Programar disparos de confirmação imediata, lembrete 24 horas antes e lembrete no dia do atendimento de forma idempotente.
+- [ ] Integrar exclusivamente a API oficial Meta Cloud API, mantendo credenciais apenas no servidor.
+- [ ] Registrar status, tentativas e falhas de entrega das mensagens de WhatsApp.
+- [ ] Criar tela administrativa para configuração segura dos dados necessários da Meta Cloud API.
+- [ ] Aplicar identidade visual elegante, sofisticada, responsiva e acessível à página pública e ao painel.
+- [ ] Escrever testes unitários para disponibilidade, prevenção de conflitos, variáveis e programação de mensagens.
+- [ ] Executar testes, revisar a interface em desktop e mobile e corrigir falhas encontradas.
+- [ ] Criar o checkpoint final com todos os itens concluídos.
+- [ ] Exibir o nome da cliente na confirmação pública, sem expor dados de contato.
+- [ ] Adicionar busca por nome ou telefone também no histórico de agendamentos do painel.
+- [ ] Validar por testes as regras de disponibilidade e prevenção de conflitos na criação de reservas.
+- [ ] Validar explicitamente as relações e restrições do banco após a migração.
+- [x] Integrar Stripe com suporte a cartão de crédito e PIX no Brasil.
+- [x] Criar tabela de pagamentos para rastrear transações de agendamentos.
+- [x] Exibir o valor do procedimento na página de confirmação do agendamento.
+- [x] Implementar desconto automático para PIX (sem taxa Stripe).
+- [x] Mostrar dois valores: PIX (sem taxa) e cartão (com taxa Stripe ~2,9% + R$ 0,30).
+- [x] Gerar link de pagamento Stripe seguro e redirecionar após confirmação.
+- [ ] Sincronizar status de pagamento com o agendamento (pendente, pago, recusado).
+- [x] Exibir comprovante de pagamento e agendamento confirmado na página de sucesso.
+- [ ] Implementar webhook de confirmação de pagamento Stripe.
+- [x] Criar página de sucesso de pagamento com comprovante.
+- [ ] Integrar lembretes automáticos via Meta Cloud API (WhatsApp).
+- [ ] Programar envio de mensagens: confirmação, 24h antes, no dia do atendimento.
+- [ ] Criar interface para editar modelos de mensagens com variáveis.
+- [ ] Testar fluxo completo: agendamento → pagamento → confirmação → lembretes.
+- [ ] Revisar visual e responsividade de todas as páginas.
+- [ ] Preparar documentação de ativação do WhatsApp Business.

@@ -1,0 +1,2 @@
+ALTER TABLE `salon_settings` ADD `whatsappDispatchTaskUid` varchar(65);--> statement-breakpoint
+ALTER TABLE `salon_settings` ADD CONSTRAINT `salon_settings_whatsapp_dispatch_task_uid_unique` UNIQUE(`whatsappDispatchTaskUid`);
