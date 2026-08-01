@@ -17,13 +17,13 @@ import {
  */
 export const users = pgTable("users", {
   id: serial("id").primaryKey(),
-  openId: varchar("openId", { length: 64 }).notNull().unique(),
+  openId: varchar("openid", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
   role: varchar("role", { length: 20 }).default("user").notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+  createdAt: timestamp("createdat").defaultNow().notNull(),
+  updatedAt: timestamp("updatedat").defaultNow().notNull(),
   lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
 });
 
@@ -37,12 +37,12 @@ export const professionals = pgTable(
     id: serial("id").primaryKey(),
     position: integer("position").notNull().unique(),
     name: varchar("name", { length: 120 }).notNull(),
-    roleLabel: varchar("roleLabel", { length: 120 }).notNull().default("Lash designer"),
+    roleLabel: varchar("rolelabel", { length: 120 }).notNull().default("Lash designer"),
     color: varchar("color", { length: 16 }).notNull().default("#9D6E60"),
     bio: text("bio"),
-    isActive: boolean("isActive").notNull().default(true),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    isActive: boolean("isactive").notNull().default(true),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   }
 );
 
@@ -51,15 +51,15 @@ export const professionalWorkHours = pgTable(
   "professional_work_hours",
   {
     id: serial("id").primaryKey(),
-    professionalId: integer("professionalId")
+    professionalId: integer("professionalid")
       .notNull()
       .references(() => professionals.id, { onDelete: "cascade" }),
-    dayOfWeek: integer("dayOfWeek").notNull(),
-    startTime: varchar("startTime", { length: 5 }).notNull(),
-    endTime: varchar("endTime", { length: 5 }).notNull(),
-    isWorking: boolean("isWorking").notNull().default(true),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    dayOfWeek: integer("dayofweek").notNull(),
+    startTime: varchar("starttime", { length: 5 }).notNull(),
+    endTime: varchar("endtime", { length: 5 }).notNull(),
+    isWorking: boolean("isworking").notNull().default(true),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   },
   table => [
     uniqueIndex("work_hours_professional_day_unique").on(table.professionalId, table.dayOfWeek),
@@ -71,15 +71,15 @@ export const professionalBreaks = pgTable(
   "professional_breaks",
   {
     id: serial("id").primaryKey(),
-    professionalId: integer("professionalId")
+    professionalId: integer("professionalid")
       .notNull()
       .references(() => professionals.id, { onDelete: "cascade" }),
-    dayOfWeek: integer("dayOfWeek").notNull(),
-    startTime: varchar("startTime", { length: 5 }).notNull(),
-    endTime: varchar("endTime", { length: 5 }).notNull(),
+    dayOfWeek: integer("dayofweek").notNull(),
+    startTime: varchar("starttime", { length: 5 }).notNull(),
+    endTime: varchar("endtime", { length: 5 }).notNull(),
     label: varchar("label", { length: 80 }).notNull().default("Intervalo"),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   },
   table => [index("breaks_professional_day_idx").on(table.professionalId, table.dayOfWeek)],
 );
@@ -91,12 +91,12 @@ export const services = pgTable(
     id: serial("id").primaryKey(),
     name: varchar("name", { length: 120 }).notNull(),
     description: text("description"),
-    durationMinutes: integer("durationMinutes").notNull(),
-    priceCents: integer("priceCents").notNull().default(0),
-    isActive: boolean("isActive").notNull().default(true),
-    sortOrder: integer("sortOrder").notNull().default(0),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    durationMinutes: integer("durationminutes").notNull(),
+    priceCents: integer("pricecents").notNull().default(0),
+    isActive: boolean("isactive").notNull().default(true),
+    sortOrder: integer("sortorder").notNull().default(0),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   },
   table => [index("services_active_sort_idx").on(table.isActive, table.sortOrder)],
 );
@@ -109,10 +109,10 @@ export const clients = pgTable(
     name: varchar("name", { length: 160 }).notNull(),
     phone: varchar("phone", { length: 32 }).notNull().unique(),
     email: varchar("email", { length: 320 }),
-    whatsappOptIn: boolean("whatsappOptIn").notNull().default(false),
-    optInAt: timestamp("optInAt"),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    whatsappOptIn: boolean("whatsappoptin").notNull().default(false),
+    optInAt: timestamp("optinat"),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   },
   table => [
     index("clients_name_idx").on(table.name),
@@ -125,25 +125,25 @@ export const appointments = pgTable(
   {
     id: serial("id").primaryKey(),
     code: varchar("code", { length: 20 }).notNull().unique(),
-    clientId: integer("clientId")
+    clientId: integer("clientid")
       .notNull()
       .references(() => clients.id),
-    professionalId: integer("professionalId")
+    professionalId: integer("professionalid")
       .notNull()
       .references(() => professionals.id),
-    serviceId: integer("serviceId")
+    serviceId: integer("serviceid")
       .notNull()
       .references(() => services.id),
-    startAt: timestamp("startAt").notNull(),
-    endAt: timestamp("endAt").notNull(),
+    startAt: timestamp("startat").notNull(),
+    endAt: timestamp("endat").notNull(),
     status: varchar("status", { length: 20 }).notNull().default("pending"),
     source: varchar("source", { length: 20 }).notNull().default("public"),
     notes: text("notes"),
     cancellationReason: text("cancellationReason"),
     confirmedAt: timestamp("confirmedAt"),
     cancelledAt: timestamp("cancelledAt"),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   },
   table => [
     index("appointments_professional_start_idx").on(table.professionalId, table.startAt),
@@ -157,14 +157,14 @@ export const appointmentSlots = pgTable(
   "appointment_slots",
   {
     id: serial("id").primaryKey(),
-    appointmentId: integer("appointmentId")
+    appointmentId: integer("appointmentid")
       .notNull()
       .references(() => appointments.id, { onDelete: "cascade" }),
-    professionalId: integer("professionalId")
+    professionalId: integer("professionalid")
       .notNull()
       .references(() => professionals.id),
-    slotStart: timestamp("slotStart").notNull(),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
+    slotStart: timestamp("slotstart").notNull(),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
   },
   table => [
     uniqueIndex("appointment_slots_professional_start_unique").on(
@@ -185,9 +185,9 @@ export const messageTemplates = pgTable(
     content: text("content").notNull(),
     metaTemplateName: varchar("metaTemplateName", { length: 512 }),
     languageCode: varchar("languageCode", { length: 16 }).notNull().default("pt_BR"),
-    isActive: boolean("isActive").notNull().default(true),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    isActive: boolean("isactive").notNull().default(true),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   }
 );
 
@@ -196,7 +196,7 @@ export const messageDeliveries = pgTable(
   "message_deliveries",
   {
     id: serial("id").primaryKey(),
-    appointmentId: integer("appointmentId")
+    appointmentId: integer("appointmentid")
       .notNull()
       .references(() => appointments.id, { onDelete: "cascade" }),
     templateId: integer("templateId").references(() => messageTemplates.id, {
@@ -211,8 +211,8 @@ export const messageDeliveries = pgTable(
     lastError: text("lastError"),
     payload: json("payload"),
     sentAt: timestamp("sentAt"),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   },
   table => [
     index("message_deliveries_status_schedule_idx").on(table.status, table.scheduledFor),
@@ -232,8 +232,8 @@ export const salonSettings = pgTable(
     whatsappBusinessAccountId: varchar("whatsappBusinessAccountId", { length: 80 }),
     whatsappEnabled: boolean("whatsappEnabled").notNull().default(false),
     whatsappDispatchTaskUid: varchar("whatsappDispatchTaskUid", { length: 65 }).unique(),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   }
 );
 
@@ -241,7 +241,7 @@ export const payments = pgTable(
   "payments",
   {
     id: serial("id").primaryKey(),
-    appointmentId: integer("appointmentId")
+    appointmentId: integer("appointmentid")
       .notNull()
       .references(() => appointments.id, { onDelete: "cascade" }),
     stripePaymentIntentId: varchar("stripePaymentIntentId", { length: 100 }).notNull().unique(),
@@ -253,8 +253,8 @@ export const payments = pgTable(
     stripeChargeId: varchar("stripeChargeId", { length: 100 }),
     lastError: text("lastError"),
     succeededAt: timestamp("succeededAt"),
-    createdAt: timestamp("createdAt").defaultNow().notNull(),
-    updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+    createdAt: timestamp("createdat").defaultNow().notNull(),
+    updatedAt: timestamp("updatedat").defaultNow().notNull(),
   },
   table => [
     index("payments_appointment_idx").on(table.appointmentId),
