@@ -50,7 +50,7 @@ export async function getDb() {
         connectionString: ENV.databaseUrl,
         ssl: { rejectUnauthorized: false }
       });
-      _db = drizzle(pool);
+      _db = drizzle(pool, { schema });
     } catch (error) {
       console.warn("[Database] Não foi possível conectar ao banco:", error);
       _db = null;
